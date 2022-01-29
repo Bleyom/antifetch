@@ -5,10 +5,14 @@
 
 ## Instalation
 
-```
+```bash
  $ git clone https://github.com/Bleyom/antifetch
  $ chmod +x antifetch
  $ sudo mv antifetch /usr/bin
+```
+### Or execute installer.sh as root
+```bash
+  sudo ./installer.sh
 ```
 
 ## Dependiences 📚
