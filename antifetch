@@ -2,7 +2,7 @@
 # AntiFetch - Bleyom
 
 # Colors
-blue='e\033[0;34m'
+# ( No used )blue='e\033[0;34m' 
 
 info() {
     title=$USER@$(cat /etc/hostname)
