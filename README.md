@@ -14,6 +14,7 @@
 ## Dependiences 📚
 - [playerctl](https://archlinux.org/packages/community/x86_64/playerctl/)
 - [xorg-xprop](https://archlinux.org/packages/extra/x86_64/xorg-xprop/)
+- [xorg-xdpyinfo] (https://archlinux.org/packages/extra/x86_64/xorg-xdpyinfo/)
 - [Any nerd font](https://www.nerdfonts.com/)
 - [Material Design Font](https://aur.archlinux.org/packages/ttf-material-design-icons/)
 
