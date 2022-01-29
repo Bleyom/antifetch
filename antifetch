@@ -8,7 +8,7 @@ info() {
     title=$USER@$(cat /etc/hostname)
     user=$USER
     os=$(grep -m1 "NAME=" </etc/os-release | cut -d '"' -f 2)
-    uptime=$(uptime -p | tr -d "up ")
+    uptime=$(uptime -p | sed 's/^.{2\}//')
     sh=$SHELL
     ramtotal=$(grep MemTotal /proc/meminfo | awk '{print $2 / 1024 / 1024 }' | awk '{printf("%.2f \n",$1)}')
     wm=$(xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}') -notype -f _NET_WM_NAME 8t | awk '{print $4}' | tr -d '{#,"}' | tr '\n' ' ' | tr -d "    " | awk '{print tolower($0)}')
