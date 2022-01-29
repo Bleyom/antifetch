@@ -2,7 +2,7 @@
 # AntiFetch - Bleyom
 
 # Colors
-# ( No used )blue='e\033[0;34m' 
+blue='e\033[0;34m'
 
 info() {
     title=$USER@$(cat /etc/hostname)
@@ -66,6 +66,17 @@ case "$(echo $d)" in
 esac
 
 paste <(printf "%s ""$asciihat$antiface$antibody") <(printf "%s" "$(setinfo)") | cat
+f=3 b=4
+for j in f b; do
+  for i in {0..7}; do
+    printf -v $j$i %b "\e[${!j}${i}m"
+  done
+done
+ 
+cat << EOF
+ 
+                                    $f1$d$t  $f2$d$t  $f3$d$t  $f4$d$t  $f5$d$t  $f6$d$t  $f7$d$t  
+EOF
 exit 0
 
 setinfo
