@@ -1,7 +1,7 @@
 # antifetch
 
 ## Preview 
-![Antifetch](https://i.imgur.com/F70gZgW.png)
+![Antifetch](https://i.imgur.com/Klq2ZV6.png)
 
 ## Instalation
 
