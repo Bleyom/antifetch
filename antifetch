@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# AntiFetch - Bleyom
+
+info () {
+    title=$USER@$(cat /etc/hostname)
+    user=$USER
+    os=$(grep -m1 "NAME=" < /etc/os-release | cut -d '"' -f 2)
+    uptime=$(uptime -p | tr -d "up ")
+    sh=$SHELL
+    ramtotal=$(grep MemTotal /proc/meminfo | awk '{print $2 / 1024 / 1024 }' | awk '{printf("%.2f \n",$1)}')
+    wm=$(xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}') -notype -f _NET_WM_NAME 8t | awk '{print $4}' | tr -d '{#,"}' | tr '\n' ' ' | tr -d "    ")
+    localip=$(ip route get 1.2.3.4 | awk '{print $7}')
+    locale=$LANG
+#    pkgs=$(echo $(pacman -Qq | wc -l && echo " ( pacman )") )      Only Works On Arch (btw)
+    music=$(playerctl metadata --format '{{ artist }} - {{ title }}')
+    cpu=$(cat /proc/cpuinfo | grep 'model name' | uniq | sed 's/^.\{13\}//')
+}
+
+setinfo () {
+    info
+    cat <<EOF
+
+    $title
+     : $user
+     : $os
+     : $uptime
+     : $sh
+     : $ramtotal GB
+     : $wm
+     : $localip
+     : $locale
+     : $music
+     : $cpu
+EOF
+}
+
+anti="
+⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣀⣀⣤⣤⣤⣄⠄⠄⠄⠄⠄⠄⠄
+⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣿⠉⣸⣿⡏⠄⠈⠄⠄⠄⠄⠄⠄⠄
+⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣀⡜⣥⣼⣿⠃⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄
+⠄⠄⠄⠄⠄⠄⠄⠄⢠⣶⣋⠪⣹⣿⣿⡄⠄⠄⠄⠄⢀⣀⠄⠄⠄⠄
+⠄⠄⠄⠄⠄⢠⣶⠛⣿⣿⠉⣿⣿⣿⣿⣿⣿⣶⡄⢰⣿⣾⠄⠄⠄⠄
+⠄⠄⠄⠄⠄⠈⠓⠛⡾⣶⣾⣿⣿⣿⣿⣿⡿⠛⠋⣴⡟⠁⠄⠄⠄⠄
+⠄⠄⠄⠄⠄⠄⠄⠄⡇⠿⣉⡿⠙⢿⣿⣿⡇⠄⢸⣿⡇⠄⠄⠄⠄⠄
+⠄⠄⠄⠄⠄⠄⠄⠄⢧⣀⠐⢚⣝⢷⣿⡿⠇⠄⠄⣿⠄⠄⠄⠄⠄⠄
+⠄⠄⠄⠄⠄⠄⠄⠄⢨⣿⣶⣮⣿⣾⣿⣥⡄⠄⠄⣿⠄⠄⠄⠄⠄⠄
+⠄⠄⠄⠄⠄⠄⠄⠄⣻⣿⣿⡿⢉⣿⣿⣿⣿⠤⣔⣣⠄⠄⠄⠄⠄⠄
+⠄⠄⠄⠄⠄⠄⠄⠄⢸⣿⣿⣷⣾⣿⡿⣿⣿⠄⠄⣿⡀⠄⠄⠄⠄⠄
+⠄⠄⠄⠄⠄⠄⠄⠄⠄⠛⠃⣻⣿⣿⠄⠘⠛⠄⠄⢻⡇⠄⠄⠄⠄⠄
+⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠉⠉⠄⠉⠉⠄⠄⠄⠄⠸⠁⠄⠄⠄⠄⠄
+
+"
+case "$(echo $d)" in
+
+    *) ascii="$anti" ;;
+
+esac
+
+paste <(printf "%s" "$ascii") <(printf "%s" "$(setinfo)") | cat
+exit 0
+
+setinfo
