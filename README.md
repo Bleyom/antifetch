@@ -1,7 +1,7 @@
 # antifetch
 
 ## Preview 
-![Antifetch](https://i.imgur.com/26jAPZp.png)
+![Antifetch](https://i.ibb.co/sqn9gNp/2022-02-08-235418-1366x768-scrot.png)
 
 ## Instalation
 
