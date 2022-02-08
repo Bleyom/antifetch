@@ -19,6 +19,7 @@ info() {
     cpu=$(cat /proc/cpuinfo | grep 'model name' | uniq | sed 's/^.\{13\}//')
     gpu=$(lspci | grep VGA | sed 's/^.\{35\}//' | tr -d '()' | rev | cut -c8- | rev)
     res=$(xdpyinfo | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/')
+    init=$(readlink /sbin/init)
 }
 
 setinfo() {
@@ -38,6 +39,7 @@ setinfo() {
      : $cpu
     󰕧 : $gpu
     󰹑 : $res
+     : $init
 EOF
 }
 
@@ -56,7 +58,8 @@ antibody="
 ⠄⠄⠄⠄⠄⠄⠄⠄⣻⣿⣿⡿⢉⣿⣿⣿⣿⠤⣔⣣⠄⠄⠄⠄⠄⠄
 ⠄⠄⠄⠄⠄⠄⠄⠄⢸⣿⣿⣷⣾⣿⡿⣿⣿⠄⠄⣿⡀⠄⠄⠄⠄⠄
 ⠄⠄⠄⠄⠄⠄⠄⠄⠄⠛⠃⣻⣿⣿⠄⠘⠛⠄⠄⢻⡇⠄⠄⠄⠄⠄
-⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠉⠉⠄⠉⠉⠄⠄⠄⠄⠸⠁⠄⠄⠄⠄⠄"
+⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠉⠉⠄⠉⠉⠄⠄⠄⠄⠸⠁⠄⠄⠄⠄⠄
+                          "
 case "$(echo $d)" in
 
 *) asciihat="$antihat" ;;
