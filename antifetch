@@ -10,7 +10,7 @@ info() {
     os=$(grep -m1 "NAME=" </etc/os-release | cut -d '"' -f 2)
     uptime=$(uptime -p | sed 's/^.{2\}//')
     sh=$SHELL
-    ramtotal=$(grep MemTotal /proc/meminfo | awk '{print $2 / 1024 / 1024 }' | awk '{printf("%.2f \n",$1)}')
+    ramtotal=$(free -h | grep "^Mem:" | awk -P '{print $3 "/" $2}')
     wm=$(wmctrl -m | sed '2,4d' | cut -c7-)
     localip=$(ip route get 1.2.3.4 | awk '{print $7}')
     locale=$LANG
